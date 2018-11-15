@@ -4,5 +4,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
-    android:gravity="center"
-    android:text="我是DialogFragment"></TextView>
+    android:gravity="center"/>

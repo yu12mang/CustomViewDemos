@@ -48,4 +48,5 @@ public class CustomDialogFragment extends DialogFragment {
         getDialog().getWindow().setLayout(dialogWidth, dialogHeight);
         getDialog().setCanceledOnTouchOutside(true); //点击边际可消失
     }
+
 }
