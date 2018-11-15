@@ -1,6 +1,7 @@
 package com.example.logan.dialogfragmentdemo;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,10 @@ import android.widget.TextView;
 public class CustomDialogFragment extends DialogFragment {
 
     private Context mContext;
+
+    private int dialogWidthPix;
+
+    private int dialogHeightPix;
 
     @Override
     public void onAttach(Context context) {
@@ -43,10 +48,21 @@ public class CustomDialogFragment extends DialogFragment {
     public void onStart() {
         super.onStart();
 
-        int dialogHeight = (int) (GlobalConfig.getInstance().getScreenHeightPixels() * 0.8);
-        int dialogWidth = (int) (GlobalConfig.getInstance().getScreenWidthPixels() * 0.8);
-        getDialog().getWindow().setLayout(dialogWidth, dialogHeight);
+        dialogHeightPix = (int) (GlobalConfig.getInstance().getScreenHeightPixels() * 0.8);
+        dialogWidthPix = (int) (GlobalConfig.getInstance().getScreenWidthPixels() * 0.8);
+
+        getDialog().getWindow().setLayout(dialogWidthPix, dialogHeightPix);
         getDialog().setCanceledOnTouchOutside(true); //点击边际可消失
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            getDialog().getWindow().setLayout(dialogWidthPix,dialogHeightPix);
+        }else{
+            getDialog().getWindow().setLayout(dialogHeightPix,dialogWidthPix);
+        }
+    }
 }
